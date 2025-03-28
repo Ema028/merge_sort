@@ -14,7 +14,7 @@ void sort(int arr[], int size)
     else
     {
         left = (size + 1) / 2;
-        right = size - right;
+        right = size - left;
     }
     
     int L[left];
@@ -31,8 +31,7 @@ void sort(int arr[], int size)
         {
             if(L[0] > L[1])
             {
-                int temp;
-                L[0] = temp;
+                int temp = L[0];
                 L[0] = L[1];
                 L[1] = temp;
             }
@@ -47,8 +46,7 @@ void sort(int arr[], int size)
         {
             if(R[0] > R[1])
             {
-                int temp;
-                R[0] = temp;
+                int temp = R[0];
                 R[0] = R[1];
                 R[1] = temp;
             }
