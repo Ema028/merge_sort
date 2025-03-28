@@ -3,8 +3,7 @@
 
 void sort(int arr[], int size)
 {
-    int right;
-    int left;
+    int right, left;
     
     if(size % 2 == 0)
     {
@@ -17,53 +16,46 @@ void sort(int arr[], int size)
         right = size - left;
     }
     
-    int L[left];
-    int R[right];
     
-    // copiar dados para os arrays temporários, ordenar metades separadas e depois juntar
+    int *L = int* malloc(left * sizeof(int));
+    int *R = int* malloc(right * sizeof(int));
+
+    // copiar dados para os arrays temporários e ir juntando metades ordenadas
     for (int i = 0; i < left; i++)
+    {
         L[i] = arr[i];
-        if(left > 2)
-        {
-            sort(L, left);
-        }
-        else if(left == 2)
-        {
-            if(L[0] > L[1])
-            {
-                int temp = L[0];
-                L[0] = L[1];
-                L[1] = temp;
-            }
-        }
-    for (int j = 0; j < right; j++)
-        R[j] = arr[left + j];
-        if(right > 2)
-        {
-            sort(R, right);
-        }
-        else if(right == 2)
-        {
-            if(R[0] > R[1])
-            {
-                int temp = R[0];
-                R[0] = R[1];
-                R[1] = temp;
-            }
-        }
+    }
         
-        int i = 0;
-        int k = 0;
-        while(i < left)
+    for (int j = 0; j < right; j++)
+    {
+        R[j] = arr[left + j];
+    }
+        
+    if(right > 1)
+    {
+        sort(R, right);
+    }
+    if(left > 1)
+    {
+        sort(L, left);
+    }
+
+    int i = 0, j = 0, k = 0;
+    while (i < left && j < right) 
+    {
+        k++;
+        if (L[i] < R[j])
         {
-            arr[i] = L[i];
+            arr[k] = L[i];
             i++;
         }
-        while(k < right)
+        else
         {
-            arr[i] = R[k];
-            i++;
-            k++;
-            
+            arr[k] = R[j];
+            j++;
         }
+    }
+
+    free(L);
+    free(R);
 }
