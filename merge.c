@@ -17,8 +17,8 @@ void sort(int arr[], int size)
     }
     
     
-    int *L = int* malloc(left * sizeof(int));
-    int *R = int* malloc(right * sizeof(int));
+    int* L = (int*) malloc(left * sizeof(int));
+    int* R = (int*) malloc(right * sizeof(int));
 
     // copiar dados para os arrays temporários e ir juntando metades ordenadas
     for (int i = 0; i < left; i++)
